@@ -11,7 +11,7 @@ app.get("/hello", (req, res, next)=>{
 });
 app.post("/emailValidate", (req, res, next)=>{
   const postData = req.body;
-  if(postData.email){
+  if (postData.email){
     res.json({"status": validator.validate(postData.email)});
   } else {
     res.status(500).json({"status": "wrongngngngngng"})
