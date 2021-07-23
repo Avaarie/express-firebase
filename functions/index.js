@@ -1,20 +1,23 @@
 const functions = require("firebase-functions");
 const express = require("express");
-const validator = require("email-validator");
+const validator = require("email-validator"); 
 const PORT = 3000;
 const app = express();
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.get("/hello", (req, res, next)=>{
+app.get("/hello", (req, res)=>{
+  console.info("GET /hello success");
   res.send("Welcome to FIRIEIEE");
 });
-app.post("/emailValidate", (req, res, next)=>{
+app.post("/emailValidate", (req, res)=>{
   const postData = req.body;
-  if (postData.email){
+  if (postData.email) {
+    console.info("POST /emailValidate success1");
     res.json({"status": validator.validate(postData.email)});
   } else {
-    res.status(500).json({"status": "wrongngngngngng"})
+    console.warn("POST /emailValidate wrong input");
+    res.status(400).json({"status": "wrongngngngngng"});
   }
 });
 app.listen(PORT, ()=>{
